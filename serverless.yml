@@ -1,0 +1,30 @@
+service: email-api
+
+framework:
+  name: serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  sendEmail:
+    handler: src/handler.sendEmail.js
+    events:
+      http:
+        path: sendEmail
+        method: post
+        cors: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  webpack:
+    packagerOptions:
+      outputPath: .aws/package/
+
+# Replace with your email provider and credentials
+environment: EMAIL_PROVIDER=google
+  EMAIL_ADDRESS=kumarreddy152002@gmail.com
+  EMAIL_PASSWORD=K@B5084287
